@@ -11,6 +11,16 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+#region Database Setup
+using (var context = new DatabaseContext())
+{
+    context.Database.EnsureDeleted();
+    context.Database.EnsureCreated();
+
+    DatabaseContext.CreateData(context);
+}
+#endregion
+
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
