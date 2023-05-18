@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Base
 {
+    [ApiController]
     public abstract class ApiController<T> : ControllerBase where T : Entity
     {
 
