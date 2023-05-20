@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230517080301_Initial")]
+    [Migration("20230520151954_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -65,10 +65,7 @@ namespace Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EditorId")
+                    b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -77,9 +74,7 @@ namespace Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
-                    b.HasIndex("EditorId");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Courses");
                 });
@@ -92,16 +87,11 @@ namespace Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ClassroomId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClassroomId");
 
                     b.ToTable("Student");
                 });
@@ -147,28 +137,13 @@ namespace Database.Migrations
 
             modelBuilder.Entity("Database.Entities.Course", b =>
                 {
-                    b.HasOne("Database.Entities.Teacher", "Author")
-                        .WithMany("CoursesWritten")
-                        .HasForeignKey("AuthorId")
+                    b.HasOne("Database.Entities.Teacher", "Teacher")
+                        .WithMany("Courses")
+                        .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Database.Entities.Teacher", null)
-                        .WithMany("CoursesEditted")
-                        .HasForeignKey("EditorId");
-
-                    b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("Database.Entities.Student", b =>
-                {
-                    b.HasOne("Database.Entities.Classroom", "Classroom")
-                        .WithMany("Students")
-                        .HasForeignKey("ClassroomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Classroom");
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Database.Entities.Teacher", b =>
@@ -182,17 +157,13 @@ namespace Database.Migrations
 
             modelBuilder.Entity("Database.Entities.Classroom", b =>
                 {
-                    b.Navigation("Students");
-
                     b.Navigation("Teacher")
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Database.Entities.Teacher", b =>
                 {
-                    b.Navigation("CoursesEditted");
-
-                    b.Navigation("CoursesWritten");
+                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }

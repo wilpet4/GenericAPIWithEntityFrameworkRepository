@@ -9,6 +9,6 @@ namespace Database.Entities
 
         public ICollection<Student> Students { get; set; }
 
-        public Teacher Author { get; set; }
+        public Teacher Teacher { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Database.Entities.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace Database.Entities
 {
@@ -7,8 +8,7 @@ namespace Database.Entities
         public int Id { get; set; }
         public string Number { get; set; }
 
-        public ICollection<Student> Students { get; set; }
-
+        [Required]
         public Teacher Teacher { get; set; }
     }
 }

@@ -29,18 +29,11 @@ namespace Database.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClassroomId = table.Column<int>(type: "int", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Student", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Student_Classrooms_ClassroomId",
-                        column: x => x.ClassroomId,
-                        principalTable: "Classrooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,23 +62,17 @@ namespace Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AuthorId = table.Column<int>(type: "int", nullable: false),
-                    EditorId = table.Column<int>(type: "int", nullable: true)
+                    TeacherId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Courses_Teacher_AuthorId",
-                        column: x => x.AuthorId,
+                        name: "FK_Courses_Teacher_TeacherId",
+                        column: x => x.TeacherId,
                         principalTable: "Teacher",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Courses_Teacher_EditorId",
-                        column: x => x.EditorId,
-                        principalTable: "Teacher",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -113,24 +100,14 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_AuthorId",
+                name: "IX_Courses_TeacherId",
                 table: "Courses",
-                column: "AuthorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Courses_EditorId",
-                table: "Courses",
-                column: "EditorId");
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseStudent_StudentsId",
                 table: "CourseStudent",
                 column: "StudentsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Student_ClassroomId",
-                table: "Student",
-                column: "ClassroomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Teacher_ClassroomId",

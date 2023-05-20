@@ -29,27 +29,25 @@ namespace Database.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Course>().HasOne(c => c.Author).WithMany(t => t.CoursesWritten);
 
-            
         }
         public static void CreateData(DatabaseContext context)
         {
-            Teacher t1 = new Teacher { Name = "Miss Anderson" };
-            Teacher t2 = new Teacher { Name = "Miss Bingham" };
-
             Classroom r1 = new Classroom { Number = "R101" };
             Classroom r2 = new Classroom { Number = "R202" };
 
-            Course c1 = new Course { Title = "Introduction to EF Core", Author = t1};
-            Course c2 = new Course { Title = "Basic Car Maintenance", Author = t2};
+            Teacher t1 = new Teacher { Name = "Anna Anderson", Classroom = r1 };
+            Teacher t2 = new Teacher { Name = "Bianca Bingham", Classroom = r2 };
 
-            Student s1 = new Student { Name = "Jenny Jones", Classroom = r1 };
-            Student s2 = new Student { Name = "Kenny Kent", Classroom = r1 };
-            Student s3 = new Student { Name = "Lucy Locket", Classroom = r1 };
-            Student s4 = new Student { Name = "Micky Most", Classroom = r2 };
-            Student s5 = new Student { Name = "Nelly Norton", Classroom = r2 };
-            Student s6 = new Student { Name = "Ozzy Osborne", Classroom = r2 };
+            Course c1 = new Course { Title = "Introduction to EF Core", Teacher = t1};
+            Course c2 = new Course { Title = "Basic Car Maintenance", Teacher = t2};
+
+            Student s1 = new Student { Name = "Jenny Jones"};
+            Student s2 = new Student { Name = "Kenny Kent" };
+            Student s3 = new Student { Name = "Lucy Locket" };
+            Student s4 = new Student { Name = "Micky Most" };
+            Student s5 = new Student { Name = "Nelly Norton" };
+            Student s6 = new Student { Name = "Ozzy Osborne" };
 
 
             c1.Students = new Student[] { s1, s2, s3, s4 };
