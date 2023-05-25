@@ -8,7 +8,7 @@ namespace Database.Entities
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public int? ClassroomId { get; set; }
+        public string ClassroomNumber { get; set; }
         public Classroom Classroom { get; set; }
 
         [ForeignKey("TeacherId")]

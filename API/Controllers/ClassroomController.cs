@@ -6,10 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ClassroomController : ApiController<Classroom>
+    public class ClassroomController : ApiController<Classroom, string>
     {
-        public ClassroomController(IRepository<Classroom> repository) : base(repository) { }
+        public ClassroomController(IRepository<Classroom, string> repository) : base(repository) { }
     }
 }

@@ -39,8 +39,8 @@ namespace Database.Context
             Teacher t1 = new Teacher { Name = "Anna Anderson", Classroom = r1 };
             Teacher t2 = new Teacher { Name = "Bianca Bingham", Classroom = r2 };
 
-            Course c1 = new Course { Title = "Introduction to EF Core", Teacher = t1};
-            Course c2 = new Course { Title = "Basic Car Maintenance", Teacher = t2};
+            Course c1 = new Course { Id = "EF1", Title = "Introduction to EF Core", Teacher = t1};
+            Course c2 = new Course { Id = "CM1", Title = "Basic Car Maintenance", Teacher = t2};
 
             Student s1 = new Student { Name = "Jenny Jones"};
             Student s2 = new Student { Name = "Kenny Kent" };

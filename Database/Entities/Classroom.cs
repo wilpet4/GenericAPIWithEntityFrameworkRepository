@@ -5,10 +5,9 @@ namespace Database.Entities
 {
     public class Classroom : Entity
     {
-        public int Id { get; set; }
+        [Key][Required]
         public string Number { get; set; }
 
-        [Required]
         public Teacher Teacher { get; set; }
     }
 }

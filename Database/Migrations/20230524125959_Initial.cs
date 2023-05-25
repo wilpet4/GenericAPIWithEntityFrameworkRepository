@@ -14,13 +14,11 @@ namespace Database.Migrations
                 name: "Classrooms",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Number = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Classrooms", x => x.Id);
+                    table.PrimaryKey("PK_Classrooms", x => x.Number);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,24 +41,24 @@ namespace Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClassroomId = table.Column<int>(type: "int", nullable: true)
+                    ClassroomNumber = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Teacher", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teacher_Classrooms_ClassroomId",
-                        column: x => x.ClassroomId,
+                        name: "FK_Teacher_Classrooms_ClassroomNumber",
+                        column: x => x.ClassroomNumber,
                         principalTable: "Classrooms",
-                        principalColumn: "Id");
+                        principalColumn: "Number",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Courses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TeacherId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -79,7 +77,7 @@ namespace Database.Migrations
                 name: "CourseStudent",
                 columns: table => new
                 {
-                    CoursesId = table.Column<int>(type: "int", nullable: false),
+                    CoursesId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     StudentsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -110,11 +108,10 @@ namespace Database.Migrations
                 column: "StudentsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teacher_ClassroomId",
+                name: "IX_Teacher_ClassroomNumber",
                 table: "Teacher",
-                column: "ClassroomId",
-                unique: true,
-                filter: "[ClassroomId] IS NOT NULL");
+                column: "ClassroomNumber",
+                unique: true);
         }
 
         /// <inheritdoc />

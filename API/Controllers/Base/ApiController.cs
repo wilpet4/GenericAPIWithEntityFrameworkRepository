@@ -5,18 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers.Base
 {
     [ApiController]
-    public abstract class ApiController<T> : ControllerBase where T : Entity
+    [Route("api/[controller]")]
+    public abstract class ApiController<TEntity, TKey> : ControllerBase where TEntity : Entity
     {
 
-        protected readonly IRepository<T> _repository;
+        protected readonly IRepository<TEntity, TKey> _repository;
 
-        public ApiController(IRepository<T> repository)
+        public ApiController(IRepository<TEntity, TKey> repository)
         {
             _repository = repository;
         }
 
         [HttpGet("{id}")]
-        public virtual async Task<ActionResult<T>> GetEntity(int id)
+        public virtual async Task<ActionResult<TEntity>> GetEntity(TKey id)
         {
             try
             {
@@ -33,7 +34,7 @@ namespace API.Controllers.Base
         }
 
         [HttpGet]
-        public virtual async Task<ActionResult<IEnumerable<T>>> GetAllEntities()
+        public virtual async Task<ActionResult<IEnumerable<TEntity>>> GetAllEntities()
         {
             try
             {
@@ -50,7 +51,7 @@ namespace API.Controllers.Base
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> CreateEntity(T entity)
+        public virtual async Task<IActionResult> CreateEntity(TEntity entity)
         {
             try
             {
@@ -67,7 +68,7 @@ namespace API.Controllers.Base
         }
 
         [HttpPut("{id}")]
-        public virtual async Task<IActionResult> UpdateEntity(int id, T entity)
+        public virtual async Task<IActionResult> UpdateEntity(TKey id, TEntity entity)
         {
             try
             {
@@ -84,7 +85,7 @@ namespace API.Controllers.Base
         }
 
         [HttpDelete("{id}")]
-        public virtual async Task<IActionResult> DeleteEntity(int id)
+        public virtual async Task<IActionResult> DeleteEntity(TKey id)
         {
             try
             {
