@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class ClassroomController : ApiController<Classroom, string>
+    public class TrainerController : ApiController<Trainer, int>
     {
-        public ClassroomController(IRepository<Classroom, string> repository) : base(repository) { }
+        public TrainerController(IRepository<Trainer, int> repository) : base(repository) { }
     }
 }
