@@ -13,6 +13,7 @@ namespace Database.Entities
         [Required, MaxLength(255)]
         public string Name { get; set; }
 
+        [Required]
         public List<Pokemon> Pokemon { get; set; }
     }
 }

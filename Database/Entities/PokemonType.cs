@@ -6,5 +6,7 @@ namespace Database.Entities
     {
         public int Id { get; set; }
         public string Value { get; set; }
+
+        public List<Pokemon> Pokemon { get; set; }
     }
 }
