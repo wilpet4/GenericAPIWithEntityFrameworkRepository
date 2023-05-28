@@ -1,7 +1,4 @@
 ﻿namespace Database.Entities.Base
 {
-    public abstract class Entity
-    {
-
-    }
+    public abstract class Entity { }
 }

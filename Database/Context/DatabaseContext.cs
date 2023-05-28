@@ -12,8 +12,8 @@ namespace Database.Context
         public DbSet<Trainer> Trainers { get; set; }
         public DbSet<Item> Items { get; set; }
 
-        public DatabaseContext() { ChangeTracker.LazyLoadingEnabled = false; }
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { ChangeTracker.LazyLoadingEnabled = false; }
+        public DatabaseContext() { }
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

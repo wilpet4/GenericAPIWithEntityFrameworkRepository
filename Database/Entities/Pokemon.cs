@@ -14,6 +14,6 @@ namespace Database.Entities
         [Required]
         public List<PokemonType> Types { get; set; }
 
-        public List<Trainer> Trainers { get; set; }
+        public virtual List<Trainer> Trainers { get; set; }
     }
 }
